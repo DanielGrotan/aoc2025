@@ -12,21 +12,29 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut password = 0;
 
     for line in lines.map_while(Result::ok) {
-        println!("{line}");
-        let sign = match &line[0..1] {
-            "L" => -1,
-            "R" => 1,
-            c => panic!("unexpected character {c}"),
+        let mut chars = line.chars();
+
+        let direction = chars.next().ok_or("empty line")?;
+        let sign = match direction {
+            'L' => -1,
+            'R' => 1,
+            c => return Err(format!("unexpected direction '{c}'").into()),
         };
 
-        let distance: i32 = line[1..].parse()?;
-        let delta = (sign * distance + 100) % 100;
+        let mut distance: i32 = chars.as_str().parse()?;
 
-        cursor = (cursor + delta) % 100;
+        let wraps = distance / 100;
+        password += wraps;
+        distance %= 100;
 
-        if cursor == 0 {
+        if sign == -1 && cursor != 0 && distance >= cursor {
+            password += 1;
+        } else if sign == 1 && distance >= 100 - cursor {
             password += 1;
         }
+
+        let delta = (sign * distance + 100) % 100;
+        cursor = (cursor + delta) % 100;
     }
 
     println!("Password: {password}");
