@@ -39,7 +39,7 @@ const IdRange = struct {
 
 fn isWrongId(id: []const u8) bool {
     for (1..id.len / 2 + 1) |pattern_length| {
-        if (isRepeatingPattern(&id, pattern_length)) {
+        if (isRepeatingPattern(id, pattern_length)) {
             return true;
         }
     }
@@ -47,7 +47,7 @@ fn isWrongId(id: []const u8) bool {
     return false;
 }
 
-fn isRepeatingPattern(id: *const []const u8, pattern_length: usize) bool {
+fn isRepeatingPattern(id: []const u8, pattern_length: usize) bool {
     if (id.len % pattern_length != 0) {
         return false;
     }
@@ -57,7 +57,7 @@ fn isRepeatingPattern(id: *const []const u8, pattern_length: usize) bool {
         const mid = start + pattern_length;
         const end = mid + pattern_length;
 
-        if (!std.mem.eql(u8, id.*[start..mid], id.*[mid..end])) {
+        if (!std.mem.eql(u8, id[start..mid], id[mid..end])) {
             return false;
         }
     }
