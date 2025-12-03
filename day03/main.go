@@ -14,4 +14,5 @@ func main() {
 	trimmed := strings.TrimSpace(string(data))
 
 	fmt.Println(Part1(trimmed))
+	fmt.Println(Part2(trimmed))
 }
