@@ -1,6 +1,14 @@
 #pragma once
-#include <string>
+#include <cstddef>
+#include <fstream>
+#include <vector>
 
-struct InputData {};
+struct InputData {
+  size_t rows;
+  size_t cols;
+  std::vector<bool> grid;
 
-InputData parseInput(std::string input);
+  bool getCell(size_t row, size_t col) const;
+};
+
+InputData parseInput(std::ifstream &file);
