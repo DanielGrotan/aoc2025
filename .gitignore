@@ -7,3 +7,7 @@ target/
 # Zig
 zig-out/
 .zig-cache/
+
+# C++
+.cache/
+build/
