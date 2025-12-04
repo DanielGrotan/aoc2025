@@ -1,4 +1,5 @@
 #include "input.h"
+#include <cstddef>
 #include <string>
 #include <vector>
 
@@ -9,6 +10,11 @@ bool InputData::getCell(size_t row, size_t col) const {
 
   size_t index = col + row * cols;
   return grid[index];
+}
+
+void InputData::removeCell(size_t row, size_t col) {
+  size_t index = col + row * cols;
+  grid[index] = false;
 }
 
 InputData parseInput(std::ifstream &file) {

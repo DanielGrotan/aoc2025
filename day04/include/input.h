@@ -9,6 +9,7 @@ struct InputData {
   std::vector<bool> grid;
 
   bool getCell(size_t row, size_t col) const;
+  void removeCell(size_t row, size_t col);
 };
 
 InputData parseInput(std::ifstream &file);
