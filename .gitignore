@@ -11,3 +11,6 @@ zig-out/
 # C++
 .cache/
 build/
+
+# OCaml
+_build/
