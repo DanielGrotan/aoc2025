@@ -14,3 +14,6 @@ build/
 
 # OCaml
 _build/
+
+# Swift
+.build/
